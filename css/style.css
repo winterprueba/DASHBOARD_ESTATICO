@@ -13,6 +13,170 @@
   box-sizing: border-box;
 }
 
+/* Fallback critico de Leaflet. Si el CSS externo no carga en GitHub Pages,
+   estas reglas evitan que los tiles queden como imagenes sueltas. */
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.leaflet-container {
+  overflow: hidden;
+  background: #dfe5eb;
+  outline-offset: 1px;
+  touch-action: pan-x pan-y;
+}
+
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.leaflet-tile {
+  filter: inherit;
+  visibility: hidden;
+}
+
+.leaflet-tile-loaded {
+  visibility: inherit;
+}
+
+.leaflet-map-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-pane > svg,
+.leaflet-pane > canvas {
+  z-index: auto;
+}
+
+.leaflet-tile-pane {
+  z-index: 200;
+}
+
+.leaflet-overlay-pane {
+  z-index: 400;
+}
+
+.leaflet-shadow-pane {
+  z-index: 500;
+}
+
+.leaflet-marker-pane {
+  z-index: 600;
+}
+
+.leaflet-tooltip-pane {
+  z-index: 650;
+}
+
+.leaflet-popup-pane {
+  z-index: 700;
+}
+
+.leaflet-control {
+  position: relative;
+  z-index: 800;
+  pointer-events: auto;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+  position: absolute;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.leaflet-top {
+  top: 0;
+}
+
+.leaflet-right {
+  right: 0;
+}
+
+.leaflet-bottom {
+  bottom: 0;
+}
+
+.leaflet-left {
+  left: 0;
+}
+
+.leaflet-control {
+  float: left;
+  clear: both;
+}
+
+.leaflet-right .leaflet-control {
+  float: right;
+}
+
+.leaflet-top .leaflet-control {
+  margin-top: 10px;
+}
+
+.leaflet-bottom .leaflet-control {
+  margin-bottom: 10px;
+}
+
+.leaflet-left .leaflet-control {
+  margin-left: 10px;
+}
+
+.leaflet-right .leaflet-control {
+  margin-right: 10px;
+}
+
+.leaflet-control-zoom {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.leaflet-control-zoom a {
+  display: block;
+  width: 30px;
+  height: 30px;
+  color: #111827;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.leaflet-control-zoom a + a {
+  border-top: 1px solid #d1d5db;
+}
+
+.leaflet-control-attribution {
+  padding: 3px 7px;
+  background: rgba(255, 255, 255, 0.84);
+  color: #334155;
+  font-size: 11px;
+}
+
+.leaflet-control-attribution a {
+  color: #0f766e;
+}
+
+.leaflet-interactive {
+  cursor: pointer;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
