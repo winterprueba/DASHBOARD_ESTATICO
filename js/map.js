@@ -54,12 +54,16 @@ let currentData = null;
 let currentLayer = null;
 let visibleData = null;
 let numericRange = null;
+let downloadUrl = null;
 
-const canvasRenderer = L.canvas({ padding: 0.5 });
 const map = L.map("map", {
   preferCanvas: true,
-  renderer: canvasRenderer,
+  zoomControl: true,
 }).setView([4.57, -74.29], 6);
+
+map.createPane("featuresPane");
+map.getPane("featuresPane").style.zIndex = 650;
+const canvasRenderer = L.canvas({ padding: 0.5, pane: "featuresPane" });
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
@@ -68,6 +72,12 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 function setStatus(message) {
   statusEl.textContent = message;
+}
+
+function refreshMapSize() {
+  map.invalidateSize({ pan: false });
+  requestAnimationFrame(() => map.invalidateSize({ pan: false }));
+  window.setTimeout(() => map.invalidateSize({ pan: false }), 120);
 }
 
 function unique(values) {
@@ -178,11 +188,11 @@ function featureColor(feature) {
 
 function styleFeature(feature) {
   return {
-    color: "#263238",
-    weight: 0.45,
-    opacity: 0.65,
+    color: "#111827",
+    weight: 0.7,
+    opacity: 0.9,
     fillColor: featureColor(feature),
-    fillOpacity: 0.72,
+    fillOpacity: 0.82,
   };
 }
 
@@ -221,6 +231,7 @@ function onEachFeature(feature, layer) {
 
 function renderMap() {
   if (!currentData) return;
+  refreshMapSize();
   if (currentLayer) {
     map.removeLayer(currentLayer);
   }
@@ -230,14 +241,19 @@ function renderMap() {
   visibleData = { ...currentData, features };
 
   currentLayer = L.geoJSON(visibleData, {
+    pane: "featuresPane",
     renderer: canvasRenderer,
     style: styleFeature,
     onEachFeature,
   }).addTo(map);
 
-  if (features.length) {
-    map.fitBounds(currentLayer.getBounds(), { padding: [22, 22] });
-  }
+  const bounds = currentLayer.getBounds();
+  window.setTimeout(() => {
+    refreshMapSize();
+    if (features.length && bounds.isValid()) {
+      map.fitBounds(bounds, { padding: [28, 28], maxZoom: 14 });
+    }
+  }, 80);
 
   updateMetrics(features);
   renderDistribution(features);
@@ -298,9 +314,10 @@ function renderTable(features) {
 
 function updateDownload() {
   if (!visibleData) return;
+  if (downloadUrl) URL.revokeObjectURL(downloadUrl);
   const blob = new Blob([JSON.stringify(visibleData)], { type: "application/geo+json" });
-  const url = URL.createObjectURL(blob);
-  downloadLink.href = url;
+  downloadUrl = URL.createObjectURL(blob);
+  downloadLink.href = downloadUrl;
   const dataset = selectedDataset();
   downloadLink.download = dataset ? dataset.file.replace(".geojson", "_filtrado.geojson") : "geojson_filtrado.geojson";
 }
@@ -345,4 +362,6 @@ pValueMax.addEventListener("input", renderMap);
 
 populateCities();
 populateIndicators();
+window.addEventListener("resize", refreshMapSize);
+window.addEventListener("load", refreshMapSize);
 loadCurrentDataset();
