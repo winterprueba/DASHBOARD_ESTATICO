@@ -318,6 +318,12 @@ input[type="checkbox"] {
   gap: 8px;
 }
 
+.empty-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 .dist-row {
   display: grid;
   grid-template-columns: minmax(90px, 1fr) 62px;

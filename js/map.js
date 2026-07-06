@@ -1,22 +1,58 @@
 const DATASETS = [
-  { city: "Armenia", indicator: "Estrato promedio", file: "lisa_estrato_promedio_armenia.geojson" },
-  { city: "Armenia", indicator: "Educacion", file: "lisa_ind_educacion_armenia.geojson" },
-  { city: "Armenia", indicator: "Laboral", file: "lisa_ind_laboral_armenia.geojson" },
-  { city: "Armenia", indicator: "Multidimensional", file: "lisa_ind_multidim_armenia.geojson" },
-  { city: "Armenia", indicator: "Pobreza habitacional", file: "lisa_ind_pobreza_hab_armenia.geojson" },
-  { city: "Armenia", indicator: "Servicios", file: "lisa_ind_servicios_armenia.geojson" },
-  { city: "Cali", indicator: "Estrato promedio", file: "lisa_estrato_promedio_cali.geojson" },
-  { city: "Cali", indicator: "Educacion", file: "lisa_ind_educacion_cali.geojson" },
-  { city: "Cali", indicator: "Laboral", file: "lisa_ind_laboral_cali.geojson" },
-  { city: "Cali", indicator: "Multidimensional", file: "lisa_ind_multidim_cali.geojson" },
-  { city: "Cali", indicator: "Pobreza habitacional", file: "lisa_ind_pobreza_hab_cali.geojson" },
-  { city: "Cali", indicator: "Servicios", file: "lisa_ind_servicios_cali.geojson" },
-  { city: "Pereira", indicator: "Estrato promedio", file: "lisa_estrato_promedio_pereira.geojson" },
-  { city: "Pereira", indicator: "Educacion", file: "lisa_ind_educacion_pereira.geojson" },
-  { city: "Pereira", indicator: "Laboral", file: "lisa_ind_laboral_pereira.geojson" },
-  { city: "Pereira", indicator: "Multidimensional", file: "lisa_ind_multidim_pereira.geojson" },
-  { city: "Pereira", indicator: "Pobreza habitacional", file: "lisa_ind_pobreza_hab_pereira.geojson" },
-  { city: "Pereira", indicator: "Servicios", file: "lisa_ind_servicios_pereira.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Armenia", indicator: "Estrato promedio", file: "lisa_estrato_promedio_armenia.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Armenia", indicator: "Educacion", file: "lisa_ind_educacion_armenia.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Armenia", indicator: "Laboral", file: "lisa_ind_laboral_armenia.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Armenia", indicator: "Multidimensional", file: "lisa_ind_multidim_armenia.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Armenia", indicator: "Pobreza habitacional", file: "lisa_ind_pobreza_hab_armenia.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Armenia", indicator: "Servicios", file: "lisa_ind_servicios_armenia.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Cali", indicator: "Estrato promedio", file: "lisa_estrato_promedio_cali.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Cali", indicator: "Educacion", file: "lisa_ind_educacion_cali.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Cali", indicator: "Laboral", file: "lisa_ind_laboral_cali.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Cali", indicator: "Multidimensional", file: "lisa_ind_multidim_cali.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Cali", indicator: "Pobreza habitacional", file: "lisa_ind_pobreza_hab_cali.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Cali", indicator: "Servicios", file: "lisa_ind_servicios_cali.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Pereira", indicator: "Estrato promedio", file: "lisa_estrato_promedio_pereira.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Pereira", indicator: "Educacion", file: "lisa_ind_educacion_pereira.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Pereira", indicator: "Laboral", file: "lisa_ind_laboral_pereira.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Pereira", indicator: "Multidimensional", file: "lisa_ind_multidim_pereira.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Pereira", indicator: "Pobreza habitacional", file: "lisa_ind_pobreza_hab_pereira.geojson" },
+  { collection: "Fase 5 - LISA univariado", analysis: "LISA", city: "Pereira", indicator: "Servicios", file: "lisa_ind_servicios_pereira.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Base de indicadores", city: "Armenia", indicator: "Base Indicadores", file: "fase4/armenia_base_indicadores.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Armenia", indicator: "Bivariado Estrato Educacion", file: "fase4/armenia_bivariado_estrato_educacion.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Armenia", indicator: "Bivariado Estrato Multidim", file: "fase4/armenia_bivariado_estrato_multidim.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Armenia", indicator: "Bivariado Estrato Servicios", file: "fase4/armenia_bivariado_estrato_servicios.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Armenia", indicator: "Bivariado Hacinamiento Pobreza Hab", file: "fase4/armenia_bivariado_hacinamiento_pobreza_hab.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Armenia", indicator: "Bivariado Internet Multidim", file: "fase4/armenia_bivariado_internet_multidim.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Armenia", indicator: "Bivariado Trabajo Multidim", file: "fase4/armenia_bivariado_trabajo_multidim.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clusters territoriales", city: "Armenia", indicator: "Clusters Territoriales", file: "fase4/armenia_clusters_territoriales.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clasificacion tematica", city: "Armenia", indicator: "Estrato Vs Servicios High Medium Low", file: "fase4/armenia_estrato_vs_servicios_high_medium_low.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clasificacion tematica", city: "Armenia", indicator: "Indices Multidimensionales", file: "fase4/armenia_indices_multidimensionales.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "LISA", city: "Armenia", indicator: "Lisa Indice Multidimensional", file: "fase4/armenia_lisa_indice_multidimensional.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clasificacion tematica", city: "Armenia", indicator: "Pobreza Habitacional Vs Estrato", file: "fase4/armenia_pobreza_habitacional_vs_estrato.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Base de indicadores", city: "Cali", indicator: "Base Indicadores", file: "fase4/cali_base_indicadores.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Cali", indicator: "Bivariado Estrato Educacion", file: "fase4/cali_bivariado_estrato_educacion.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Cali", indicator: "Bivariado Estrato Multidim", file: "fase4/cali_bivariado_estrato_multidim.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Cali", indicator: "Bivariado Estrato Servicios", file: "fase4/cali_bivariado_estrato_servicios.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Cali", indicator: "Bivariado Hacinamiento Pobreza Hab", file: "fase4/cali_bivariado_hacinamiento_pobreza_hab.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Cali", indicator: "Bivariado Internet Multidim", file: "fase4/cali_bivariado_internet_multidim.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Cali", indicator: "Bivariado Trabajo Multidim", file: "fase4/cali_bivariado_trabajo_multidim.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clusters territoriales", city: "Cali", indicator: "Clusters Territoriales", file: "fase4/cali_clusters_territoriales.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clasificacion tematica", city: "Cali", indicator: "Estrato Vs Servicios High Medium Low", file: "fase4/cali_estrato_vs_servicios_high_medium_low.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clasificacion tematica", city: "Cali", indicator: "Indices Multidimensionales", file: "fase4/cali_indices_multidimensionales.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "LISA", city: "Cali", indicator: "Lisa Indice Multidimensional", file: "fase4/cali_lisa_indice_multidimensional.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clasificacion tematica", city: "Cali", indicator: "Pobreza Habitacional Vs Estrato", file: "fase4/cali_pobreza_habitacional_vs_estrato.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Base de indicadores", city: "Pereira", indicator: "Base Indicadores", file: "fase4/pereira_base_indicadores.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Pereira", indicator: "Bivariado Estrato Educacion", file: "fase4/pereira_bivariado_estrato_educacion.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Pereira", indicator: "Bivariado Estrato Multidim", file: "fase4/pereira_bivariado_estrato_multidim.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Pereira", indicator: "Bivariado Estrato Servicios", file: "fase4/pereira_bivariado_estrato_servicios.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Pereira", indicator: "Bivariado Hacinamiento Pobreza Hab", file: "fase4/pereira_bivariado_hacinamiento_pobreza_hab.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Pereira", indicator: "Bivariado Internet Multidim", file: "fase4/pereira_bivariado_internet_multidim.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Bivariado", city: "Pereira", indicator: "Bivariado Trabajo Multidim", file: "fase4/pereira_bivariado_trabajo_multidim.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clusters territoriales", city: "Pereira", indicator: "Clusters Territoriales", file: "fase4/pereira_clusters_territoriales.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clasificacion tematica", city: "Pereira", indicator: "Estrato Vs Servicios High Medium Low", file: "fase4/pereira_estrato_vs_servicios_high_medium_low.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clasificacion tematica", city: "Pereira", indicator: "Indices Multidimensionales", file: "fase4/pereira_indices_multidimensionales.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "LISA", city: "Pereira", indicator: "Lisa Indice Multidimensional", file: "fase4/pereira_lisa_indice_multidimensional.geojson" },
+  { collection: "Fase 4 - indicadores y escenarios", analysis: "Clasificacion tematica", city: "Pereira", indicator: "Pobreza Habitacional Vs Estrato", file: "fase4/pereira_pobreza_habitacional_vs_estrato.geojson" },
 ];
 
 const CLUSTER_COLORS = {
@@ -36,11 +72,32 @@ const QUADRANT_COLORS = {
   0: "#a8a8a8",
 };
 
+const COLOR_FIELDS = ["lisa_color", "categoria_color", "cluster_color"];
+const CATEGORY_FIELDS = [
+  "lisa_cluster",
+  "categoria_bivariada",
+  "cluster_label",
+  "estrato_grupo_mza",
+  "hacinamiento_grupo_mza",
+  "acceso_servicios_grupo_mza",
+  "educacion_grupo_mza",
+  "quadrant",
+  "CLUSTER",
+];
+
+const collectionSelect = document.querySelector("#collectionSelect");
+const analysisSelect = document.querySelector("#analysisSelect");
 const citySelect = document.querySelector("#citySelect");
 const indicatorSelect = document.querySelector("#indicatorSelect");
 const colorMode = document.querySelector("#colorMode");
 const numericGroup = document.querySelector("#numericGroup");
 const numericField = document.querySelector("#numericField");
+const categoryGroup = document.querySelector("#categoryGroup");
+const categoryField = document.querySelector("#categoryField");
+const categoryValueGroup = document.querySelector("#categoryValueGroup");
+const categoryValue = document.querySelector("#categoryValue");
+const significanceGroup = document.querySelector("#significanceGroup");
+const pValueGroup = document.querySelector("#pValueGroup");
 const significantOnly = document.querySelector("#significantOnly");
 const pValueMax = document.querySelector("#pValueMax");
 const statusEl = document.querySelector("#status");
@@ -92,7 +149,11 @@ function parseNumber(value) {
 
 function selectedDataset() {
   return DATASETS.find(
-    (item) => item.city === citySelect.value && item.indicator === indicatorSelect.value
+    (item) =>
+      item.collection === collectionSelect.value &&
+      item.analysis === analysisSelect.value &&
+      item.city === citySelect.value &&
+      item.indicator === indicatorSelect.value
   );
 }
 
@@ -106,12 +167,29 @@ function fillSelect(select, values) {
   });
 }
 
+function rowsForSelection(level) {
+  return DATASETS.filter((item) => {
+    if (level !== "collection" && item.collection !== collectionSelect.value) return false;
+    if (level !== "analysis" && level !== "collection" && item.analysis !== analysisSelect.value) return false;
+    if (level === "indicator" && item.city !== citySelect.value) return false;
+    return true;
+  });
+}
+
+function populateCollections() {
+  fillSelect(collectionSelect, unique(DATASETS.map((item) => item.collection)));
+}
+
+function populateAnalyses() {
+  fillSelect(analysisSelect, unique(rowsForSelection("analysis").map((item) => item.analysis)));
+}
+
 function populateCities() {
-  fillSelect(citySelect, unique(DATASETS.map((item) => item.city)));
+  fillSelect(citySelect, unique(rowsForSelection("city").map((item) => item.city)));
 }
 
 function populateIndicators() {
-  const indicators = DATASETS.filter((item) => item.city === citySelect.value).map((item) => item.indicator);
+  const indicators = rowsForSelection("indicator").map((item) => item.indicator);
   fillSelect(indicatorSelect, unique(indicators));
 }
 
@@ -127,10 +205,45 @@ function getNumericFields(data) {
   );
 }
 
+function getCategoryFields(data) {
+  const keys = propertyKeys(data);
+  return CATEGORY_FIELDS.filter((key) => keys.includes(key));
+}
+
 function updateNumericFields() {
   const fields = currentData ? getNumericFields(currentData) : [];
   fillSelect(numericField, fields);
   numericGroup.style.display = colorMode.value === "numeric" ? "grid" : "none";
+}
+
+function updateCategoryFields() {
+  const fields = currentData ? getCategoryFields(currentData) : [];
+  fillSelect(categoryField, fields);
+  categoryGroup.style.display = fields.length ? "grid" : "none";
+  updateCategoryValues();
+}
+
+function updateCategoryValues() {
+  if (!currentData || !categoryField.value) {
+    categoryValueGroup.style.display = "none";
+    categoryValue.innerHTML = "";
+    return;
+  }
+  const values = unique(
+    currentData.features
+      .map((feature) => feature.properties?.[categoryField.value])
+      .filter((value) => value !== null && value !== undefined && value !== "")
+      .map(String)
+  );
+  fillSelect(categoryValue, ["Todas", ...values]);
+  categoryValueGroup.style.display = values.length ? "grid" : "none";
+}
+
+function updateSignificanceControls() {
+  const hasPValue = currentData && propertyKeys(currentData).includes("p_value");
+  significanceGroup.style.display = hasPValue ? "grid" : "none";
+  pValueGroup.style.display = hasPValue ? "grid" : "none";
+  if (!hasPValue) significantOnly.checked = false;
 }
 
 function isVisibleFeature(feature) {
@@ -142,7 +255,13 @@ function isVisibleFeature(feature) {
 
 function filteredFeatures() {
   if (!currentData) return [];
-  return currentData.features.filter(isVisibleFeature);
+  return currentData.features.filter((feature) => {
+    if (!isVisibleFeature(feature)) return false;
+    if (categoryValueGroup.style.display !== "none" && categoryValue.value && categoryValue.value !== "Todas") {
+      return String(feature.properties?.[categoryField.value]) === categoryValue.value;
+    }
+    return true;
+  });
 }
 
 function computeNumericRange(features) {
@@ -176,6 +295,12 @@ function rampColor(value, min, max) {
 
 function featureColor(feature) {
   const props = feature.properties || {};
+  if (colorMode.value === "auto") {
+    const colorField = COLOR_FIELDS.find((field) => props[field]);
+    if (colorField) return props[colorField];
+    if (props.lisa_cluster) return CLUSTER_COLORS[props.lisa_cluster] || "#8c8c8c";
+    if (props.quadrant !== undefined) return QUADRANT_COLORS[String(props.quadrant)] || "#8c8c8c";
+  }
   if (colorMode.value === "cluster") {
     return CLUSTER_COLORS[props.lisa_cluster] || "#8c8c8c";
   }
@@ -268,9 +393,14 @@ function updateMetrics(features) {
 }
 
 function renderDistribution(features) {
-  const field = currentData?.features?.some((feature) => feature.properties?.lisa_cluster)
-    ? "lisa_cluster"
-    : "quadrant";
+  const keys = propertyKeys({ features });
+  const field =
+    CATEGORY_FIELDS.find((key) => keys.includes(key)) ||
+    (keys.includes("quadrant") ? "quadrant" : null);
+  if (!field) {
+    distribution.innerHTML = "<p class=\"empty-note\">No hay campo categorico para resumir.</p>";
+    return;
+  }
   const counts = new Map();
   features.forEach((feature) => {
     const value = feature.properties?.[field] ?? "Sin dato";
@@ -281,7 +411,12 @@ function renderDistribution(features) {
   distribution.innerHTML = entries
     .map(([label, count]) => {
       const width = Math.round((count / max) * 100);
-      const color = CLUSTER_COLORS[label] || QUADRANT_COLORS[String(label)] || "#0f766e";
+      const example = features.find((feature) => String(feature.properties?.[field] ?? "Sin dato") === String(label));
+      const color =
+        (example && COLOR_FIELDS.map((name) => example.properties?.[name]).find(Boolean)) ||
+        CLUSTER_COLORS[label] ||
+        QUADRANT_COLORS[String(label)] ||
+        "#0f766e";
       return `
         <div class="dist-row">
           <div>
@@ -338,6 +473,8 @@ async function loadCurrentDataset() {
     if (!response.ok) throw new Error(`No se pudo cargar ${dataset.file}`);
     currentData = await response.json();
     updateNumericFields();
+    updateCategoryFields();
+    updateSignificanceControls();
     renderMap();
     setStatus("Listo");
   } catch (error) {
@@ -347,6 +484,17 @@ async function loadCurrentDataset() {
   }
 }
 
+collectionSelect.addEventListener("change", () => {
+  populateAnalyses();
+  populateCities();
+  populateIndicators();
+  loadCurrentDataset();
+});
+analysisSelect.addEventListener("change", () => {
+  populateCities();
+  populateIndicators();
+  loadCurrentDataset();
+});
 citySelect.addEventListener("change", () => {
   populateIndicators();
   loadCurrentDataset();
@@ -357,9 +505,16 @@ colorMode.addEventListener("change", () => {
   renderMap();
 });
 numericField.addEventListener("change", renderMap);
+categoryField.addEventListener("change", () => {
+  updateCategoryValues();
+  renderMap();
+});
+categoryValue.addEventListener("change", renderMap);
 significantOnly.addEventListener("change", renderMap);
 pValueMax.addEventListener("input", renderMap);
 
+populateCollections();
+populateAnalyses();
 populateCities();
 populateIndicators();
 window.addEventListener("resize", refreshMapSize);

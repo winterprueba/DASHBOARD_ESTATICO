@@ -3,26 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tablero LISA GeoJSON v1.1</title>
+    <title>Tablero LISA GeoJSON v1.2.4</title>
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIINfQwCOQ0hLMPK9ePhQhMD7FJcZjWg5nY="
       crossorigin=""
     />
-    <link rel="stylesheet" href="css/style.css?v=1.1" />
+    <link rel="stylesheet" href="css/style.css?v=1.2.4" />
   </head>
   <body>
     <header class="app-header">
       <div>
         <p class="eyebrow">Correlacion espacial</p>
-        <h1>Tablero interactivo LISA v1.1</h1>
+        <h1>Tablero interactivo LISA v1.2.4</h1>
       </div>
       <div class="status" id="status">Listo</div>
     </header>
 
     <main class="layout">
       <aside class="panel">
+        <section class="control-group">
+          <label for="collectionSelect">Coleccion</label>
+          <select id="collectionSelect"></select>
+        </section>
+
+        <section class="control-group">
+          <label for="analysisSelect">Tipo de analisis</label>
+          <select id="analysisSelect"></select>
+        </section>
+
         <section class="control-group">
           <label for="citySelect">Ciudad</label>
           <select id="citySelect"></select>
@@ -36,6 +46,7 @@
         <section class="control-group">
           <label for="colorMode">Color del mapa</label>
           <select id="colorMode">
+            <option value="auto">Color recomendado</option>
             <option value="cluster">Cluster LISA</option>
             <option value="quadrant">Cuadrante</option>
             <option value="numeric">Variable numerica</option>
@@ -47,12 +58,22 @@
           <select id="numericField"></select>
         </section>
 
-        <section class="control-row">
+        <section class="control-group" id="categoryGroup">
+          <label for="categoryField">Campo de categoria</label>
+          <select id="categoryField"></select>
+        </section>
+
+        <section class="control-group" id="categoryValueGroup">
+          <label for="categoryValue">Filtrar categoria</label>
+          <select id="categoryValue"></select>
+        </section>
+
+        <section class="control-row" id="significanceGroup">
           <input id="significantOnly" type="checkbox" />
           <label for="significantOnly">Solo significativos</label>
         </section>
 
-        <section class="control-group">
+        <section class="control-group" id="pValueGroup">
           <label for="pValueMax">p-value maximo</label>
           <input id="pValueMax" type="number" min="0.001" max="1" step="0.001" value="0.05" />
         </section>
@@ -96,6 +117,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="js/map.js?v=1.1"></script>
+    <script src="js/map.js?v=1.2.4"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-# Tablero LISA GeoJSON con Leaflet y GitHub Pages
+# Tablero LISA GeoJSON con Leaflet y GitHub Pages v1.2.4
 
 Este proyecto es una version estatica del tablero. No usa Python ni servidor backend, por lo que puede publicarse en GitHub Pages.
 
@@ -12,12 +12,23 @@ Este proyecto es una version estatica del tablero. No usa Python ni servidor bac
 |-- js/
 |   `-- map.js
 |-- data/
-|   `-- *.geojson
+|   |-- *.geojson
+|   `-- fase4/
+|       `-- *.geojson
 |-- .nojekyll
 `-- README.md
 ```
 
-Los GeoJSON se dejan separados por ciudad e indicador para que el navegador cargue solo la capa seleccionada. Esto es mas liviano que combinar todos los indicadores de una ciudad en un unico archivo.
+Los GeoJSON se dejan separados por ciudad, fase y tipo de analisis para que el navegador cargue solo la capa seleccionada. Esto es mas liviano que combinar todos los indicadores de una ciudad en un unico archivo.
+
+## Cambios v1.2.4
+
+- Se agregaron 36 capas nuevas de fase 4 en `data/fase4/`.
+- Se agrego filtro de coleccion/fase.
+- Se agrego filtro de tipo de analisis.
+- Se agrego filtro dinamico por campo de categoria.
+- El color recomendado usa `lisa_color`, `categoria_color` o `cluster_color` cuando el GeoJSON los trae.
+- Los controles de p-value se ocultan en capas que no tienen `p_value`.
 
 ## Ver localmente
 
@@ -47,4 +58,4 @@ Si abres `index.html` con doble clic, el navegador puede bloquear la carga de ar
 
 ## Actualizar capas
 
-Si agregas nuevos GeoJSON, copialos en `data/` y agrega una entrada en el arreglo `DATASETS` dentro de `js/map.js`.
+Si agregas nuevos GeoJSON, copialos en `data/` o en una subcarpeta y agrega una entrada en el arreglo `DATASETS` dentro de `js/map.js`.
