@@ -262,6 +262,12 @@ h2 {
   align-items: center;
 }
 
+.range-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
 label {
   color: #334155;
   font-size: 13px;

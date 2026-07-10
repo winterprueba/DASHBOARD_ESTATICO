@@ -55,6 +55,11 @@ const DATASETS = [
   { collection: "Fase 4 - indicadores y escenarios", analysis: "Clasificacion tematica", city: "Pereira", indicator: "Pobreza Habitacional Vs Estrato", file: "fase4/pereira_pobreza_habitacional_vs_estrato.geojson" },
 ];
 
+const DATASET_CATALOG = DATASETS.filter((item) => item.analysis !== "Clasificacion tematica").map((item) => ({
+  ...item,
+  collection: item.collection.replace(/^Fase \d+ - /, ""),
+}));
+
 const CLUSTER_COLORS = {
   "High-High": "#d73027",
   "Low-Low": "#4575b4",
@@ -62,14 +67,6 @@ const CLUSTER_COLORS = {
   "High-Low": "#f46d43",
   "Not Significant": "#a8a8a8",
   "Not significant": "#a8a8a8",
-};
-
-const QUADRANT_COLORS = {
-  1: "#d73027",
-  2: "#74add1",
-  3: "#4575b4",
-  4: "#f46d43",
-  0: "#a8a8a8",
 };
 
 const COLOR_FIELDS = ["lisa_color", "categoria_color", "cluster_color"];
@@ -81,7 +78,6 @@ const CATEGORY_FIELDS = [
   "hacinamiento_grupo_mza",
   "acceso_servicios_grupo_mza",
   "educacion_grupo_mza",
-  "quadrant",
   "CLUSTER",
 ];
 
@@ -89,9 +85,11 @@ const collectionSelect = document.querySelector("#collectionSelect");
 const analysisSelect = document.querySelector("#analysisSelect");
 const citySelect = document.querySelector("#citySelect");
 const indicatorSelect = document.querySelector("#indicatorSelect");
-const colorMode = document.querySelector("#colorMode");
 const numericGroup = document.querySelector("#numericGroup");
 const numericField = document.querySelector("#numericField");
+const numericRangeGroup = document.querySelector("#numericRangeGroup");
+const numericMin = document.querySelector("#numericMin");
+const numericMax = document.querySelector("#numericMax");
 const categoryGroup = document.querySelector("#categoryGroup");
 const categoryField = document.querySelector("#categoryField");
 const categoryValueGroup = document.querySelector("#categoryValueGroup");
@@ -148,7 +146,7 @@ function parseNumber(value) {
 }
 
 function selectedDataset() {
-  return DATASETS.find(
+  return DATASET_CATALOG.find(
     (item) =>
       item.collection === collectionSelect.value &&
       item.analysis === analysisSelect.value &&
@@ -168,7 +166,7 @@ function fillSelect(select, values) {
 }
 
 function rowsForSelection(level) {
-  return DATASETS.filter((item) => {
+  return DATASET_CATALOG.filter((item) => {
     if (level !== "collection" && item.collection !== collectionSelect.value) return false;
     if (level !== "analysis" && level !== "collection" && item.analysis !== analysisSelect.value) return false;
     if (level === "indicator" && item.city !== citySelect.value) return false;
@@ -177,7 +175,7 @@ function rowsForSelection(level) {
 }
 
 function populateCollections() {
-  fillSelect(collectionSelect, unique(DATASETS.map((item) => item.collection)));
+  fillSelect(collectionSelect, unique(DATASET_CATALOG.map((item) => item.collection)));
 }
 
 function populateAnalyses() {
@@ -212,8 +210,11 @@ function getCategoryFields(data) {
 
 function updateNumericFields() {
   const fields = currentData ? getNumericFields(currentData) : [];
-  fillSelect(numericField, fields);
-  numericGroup.style.display = colorMode.value === "numeric" ? "grid" : "none";
+  fillSelect(numericField, ["Sin filtro", ...fields]);
+  numericGroup.style.display = fields.length ? "grid" : "none";
+  numericRangeGroup.style.display = fields.length ? "grid" : "none";
+  numericMin.value = "";
+  numericMax.value = "";
 }
 
 function updateCategoryFields() {
@@ -260,6 +261,14 @@ function filteredFeatures() {
     if (categoryValueGroup.style.display !== "none" && categoryValue.value && categoryValue.value !== "Todas") {
       return String(feature.properties?.[categoryField.value]) === categoryValue.value;
     }
+    if (numericField.value && numericField.value !== "Sin filtro") {
+      const value = parseNumber(feature.properties?.[numericField.value]);
+      const min = parseNumber(numericMin.value);
+      const max = parseNumber(numericMax.value);
+      if (!Number.isFinite(value)) return false;
+      if (Number.isFinite(min) && value < min) return false;
+      if (Number.isFinite(max) && value > max) return false;
+    }
     return true;
   });
 }
@@ -295,20 +304,10 @@ function rampColor(value, min, max) {
 
 function featureColor(feature) {
   const props = feature.properties || {};
-  if (colorMode.value === "auto") {
-    const colorField = COLOR_FIELDS.find((field) => props[field]);
-    if (colorField) return props[colorField];
-    if (props.lisa_cluster) return CLUSTER_COLORS[props.lisa_cluster] || "#8c8c8c";
-    if (props.quadrant !== undefined) return QUADRANT_COLORS[String(props.quadrant)] || "#8c8c8c";
-  }
-  if (colorMode.value === "cluster") {
-    return CLUSTER_COLORS[props.lisa_cluster] || "#8c8c8c";
-  }
-  if (colorMode.value === "quadrant") {
-    return QUADRANT_COLORS[String(props.quadrant)] || "#8c8c8c";
-  }
-  const value = parseNumber(props[numericField.value]);
-  return rampColor(value, numericRange.min, numericRange.max);
+  const colorField = COLOR_FIELDS.find((field) => props[field]);
+  if (colorField) return props[colorField];
+  if (props.lisa_cluster) return CLUSTER_COLORS[props.lisa_cluster] || "#8c8c8c";
+  return "#0f766e";
 }
 
 function styleFeature(feature) {
@@ -394,9 +393,7 @@ function updateMetrics(features) {
 
 function renderDistribution(features) {
   const keys = propertyKeys({ features });
-  const field =
-    CATEGORY_FIELDS.find((key) => keys.includes(key)) ||
-    (keys.includes("quadrant") ? "quadrant" : null);
+  const field = CATEGORY_FIELDS.find((key) => keys.includes(key));
   if (!field) {
     distribution.innerHTML = "<p class=\"empty-note\">No hay campo categorico para resumir.</p>";
     return;
@@ -415,7 +412,6 @@ function renderDistribution(features) {
       const color =
         (example && COLOR_FIELDS.map((name) => example.properties?.[name]).find(Boolean)) ||
         CLUSTER_COLORS[label] ||
-        QUADRANT_COLORS[String(label)] ||
         "#0f766e";
       return `
         <div class="dist-row">
@@ -500,11 +496,9 @@ citySelect.addEventListener("change", () => {
   loadCurrentDataset();
 });
 indicatorSelect.addEventListener("change", loadCurrentDataset);
-colorMode.addEventListener("change", () => {
-  updateNumericFields();
-  renderMap();
-});
 numericField.addEventListener("change", renderMap);
+numericMin.addEventListener("input", renderMap);
+numericMax.addEventListener("input", renderMap);
 categoryField.addEventListener("change", () => {
   updateCategoryValues();
   renderMap();

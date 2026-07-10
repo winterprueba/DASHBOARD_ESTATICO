@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tablero LISA GeoJSON v1.2.4</title>
+    <title>Tablero LISA GeoJSON v1.5.3</title>
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIINfQwCOQ0hLMPK9ePhQhMD7FJcZjWg5nY="
       crossorigin=""
     />
-    <link rel="stylesheet" href="css/style.css?v=1.2.4" />
+    <link rel="stylesheet" href="css/style.css?v=1.5.3" />
   </head>
   <body>
     <header class="app-header">
       <div>
         <p class="eyebrow">Correlacion espacial</p>
-        <h1>Tablero interactivo LISA v1.2.4</h1>
+        <h1>Tablero interactivo LISA v1.5.3</h1>
       </div>
       <div class="status" id="status">Listo</div>
     </header>
@@ -43,23 +43,24 @@
           <select id="indicatorSelect"></select>
         </section>
 
-        <section class="control-group">
-          <label for="colorMode">Color del mapa</label>
-          <select id="colorMode">
-            <option value="auto">Color recomendado</option>
-            <option value="cluster">Cluster LISA</option>
-            <option value="quadrant">Cuadrante</option>
-            <option value="numeric">Variable numerica</option>
-          </select>
-        </section>
-
         <section class="control-group" id="numericGroup">
-          <label for="numericField">Variable numerica</label>
+          <label for="numericField">Filtrar por variable numerica</label>
           <select id="numericField"></select>
         </section>
 
+        <section class="range-grid" id="numericRangeGroup">
+          <div class="control-group">
+            <label for="numericMin">Minimo</label>
+            <input id="numericMin" type="number" step="any" placeholder="Sin minimo" />
+          </div>
+          <div class="control-group">
+            <label for="numericMax">Maximo</label>
+            <input id="numericMax" type="number" step="any" placeholder="Sin maximo" />
+          </div>
+        </section>
+
         <section class="control-group" id="categoryGroup">
-          <label for="categoryField">Campo de categoria</label>
+          <label for="categoryField">Filtrar por categoria o cluster</label>
           <select id="categoryField"></select>
         </section>
 
@@ -117,6 +118,6 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="js/map.js?v=1.2.4"></script>
+    <script src="js/map.js?v=1.5.3"></script>
   </body>
 </html>
